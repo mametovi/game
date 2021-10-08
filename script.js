@@ -96,8 +96,8 @@ function resetGame() {
   heroY = 0;
 
   if(resetState) {    
-    alert(window.TelegramGameProxy.initParams.userId);
-    alert(window.TelegramGameProxy.initParams);
+    introductionElement.style.opacity = 1;
+    introductionElement.text = window.TelegramGameProxy.initParams;
     const user_id = window.TelegramGameProxy.initParams.userId;    
     postScoreUser({
       chat_id: user_id,
