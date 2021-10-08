@@ -96,7 +96,7 @@ function resetGame() {
   heroY = 0;
 
   if(resetState) {
-    const user_id = TelegramGameProxy.initParams.userId
+    const user_id = window.TelegramGameProxy.initParams.userId
     if(user_id) {
       postScoreUser({
         chat_id: user_id,
