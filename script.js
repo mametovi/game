@@ -96,14 +96,14 @@ function resetGame() {
   heroY = 0;
 
   if(resetState) {
-    const user_id = 123 //window.TelegramGameProxy.initParams.userId
-    if(user_id) {
+    const user_id = window.TelegramGameProxy.initParams.userId
+    
       postScoreUser({
         chat_id: user_id,
         score: score,
         game_name: 'Ninja'
       })
-    }
+    
   }
 
   draw();
