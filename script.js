@@ -95,16 +95,16 @@ function resetGame() {
   heroX = platforms[0].x + platforms[0].w - heroDistanceFromEdge;
   heroY = 0;
 
-  if(resetState) {
-    const user_id = 123 //window.TelegramGameProxy.initParams.userId
-    if(user_id) {
-      postScoreUser({
-        chat_id: user_id,
-        score: score,
-        game_name: 'Ninja'
-      })
-    }
-  }
+  // if(resetState) {
+  //   const user_id = 123 //window.TelegramGameProxy.initParams.userId
+  //   if(user_id) {
+  //     postScoreUser({
+  //       chat_id: user_id,
+  //       score: score,
+  //       game_name: 'Ninja'
+  //     })
+  //   }
+  // }
 
   draw();
 }
@@ -182,31 +182,18 @@ window.addEventListener("resize", function (event) {
 window.requestAnimationFrame(animate);
 
 
-function postScoreUser(data) {
+// function postScoreUser(data) {
+//   const formData = new FormData();
+
+//   Object.keys(data).forEach(key => formData.append(key, data[key]));
+
+//   var xhr = new XMLHttpRequest();
   
-  const formData = new FormData();
+//   xhr.open("POST", 'http://62.209.143.176:5000/game_stats', true);
+//   xhr.setRequestHeader("Content-type", "application/form-data");  
 
-  Object.keys(data).forEach(key => formData.append(key, data[key]));
-
-  var xhr = new XMLHttpRequest();
-  
-  xhr.open("POST", 'http://62.209.143.176:5000/game_stats', true);
-
-  //Передаёт правильный заголовок в запросе
-  xhr.setRequestHeader("Content-type", "application/form-data");
-
-  xhr.onreadystatechange = function() {//Вызывает функцию при смене состояния.
-      if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-          // Запрос завершён. Здесь можно обрабатывать результат.
-      }
-  }
-  xhr.send(formData);
-  // xhr.send('string');
-  // xhr.send(new Blob());
-  // xhr.send(new Int8Array());
-  // xhr.send({ form: 'data' });
-  // xhr.send(document);
-}
+//   xhr.send(formData);  
+// }
 
 // The main game loop
 function animate(timestamp) {
