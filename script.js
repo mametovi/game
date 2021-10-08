@@ -1,44 +1,34 @@
-/*
-If you want to know how this game was made, check out this video, that explains how it's made: 
-https://youtu.be/eue3UdFvwPo
-Follow me on twitter for more: https://twitter.com/HunorBorbely
-*/
 
-// Extend the base functionality of JavaScript
 Array.prototype.last = function () {
   return this[this.length - 1];
 };
 
-// A sinus function that acceps degrees instead of radians
 Math.sinus = function (degree) {
   return Math.sin((degree / 180) * Math.PI);
 };
 
-// Game data
-let phase = "waiting"; // waiting | stretching | turning | walking | transitioning | falling
-let lastTimestamp; // The timestamp of the previous requestAnimationFrame cycle
+let phase = "waiting"; 
+let lastTimestamp; 
 
-let heroX; // Changes when moving forward
-let heroY; // Only changes when falling
-let sceneOffset; // Moves the whole game
+let heroX; 
+let heroY; 
+let sceneOffset; 
 
 let platforms = [];
 let sticks = [];
 let trees = [];
 
-// Todo: Save high score to localStorage (?)
+
 
 let score = 0;
 
-// Configuration
 const canvasWidth = 375;
 const canvasHeight = 375;
 const platformHeight = 100;
-const heroDistanceFromEdge = 10; // While waiting
-const paddingX = 100; // The waiting position of the hero in from the original canvas size
+const heroDistanceFromEdge = 10; 
+const paddingX = 100; 
 const perfectAreaSize = 10;
 
-// The background moves slower than the hero
 const backgroundSpeedMultiplier = 0.2;
 
 const hill1BaseHeight = 100;
@@ -68,12 +58,10 @@ const perfectElement = document.getElementById("perfect");
 const restartButton = document.getElementById("restart");
 const scoreElement = document.getElementById("score");
 
-// Initialize layout
-resetGame();
 
-// Resets game variables and layouts but does not start the game (game starts on keypress)
+var resetState = 0 
+
 function resetGame() {
-  // Reset game progress
   phase = "waiting";
   lastTimestamp = undefined;
   sceneOffset = 0;
@@ -84,8 +72,6 @@ function resetGame() {
   restartButton.style.display = "none";
   scoreElement.innerText = score;
 
-  // The first platform is always the same
-  // x + w has to match paddingX
   platforms = [{ x: 50, w: 50 }];
   generatePlatform();
   generatePlatform();
@@ -109,6 +95,17 @@ function resetGame() {
   heroX = platforms[0].x + platforms[0].w - heroDistanceFromEdge;
   heroY = 0;
 
+  if(resetState) {
+    const user_id = 123 //window.TelegramGameProxy.initParams.userId
+    if(user_id) {
+      postScoreUser({
+        chat_id: user_id,
+        score: score,
+        game_name: 'Ninja'
+      })
+    }
+  }
+
   draw();
 }
 
@@ -116,7 +113,6 @@ function generateTree() {
   const minimumGap = 30;
   const maximumGap = 150;
 
-  // X coordinate of the right edge of the furthest tree
   const lastTree = trees[trees.length - 1];
   let furthestX = lastTree ? lastTree.x : 0;
 
@@ -128,7 +124,7 @@ function generateTree() {
   const treeColors = ["#6D8821", "#8FAC34", "#98B333"];
   const color = treeColors[Math.floor(Math.random() * 3)];
 
-  trees.push({ x, color });
+  trees.push({ x, color });  
 }
 
 function generatePlatform() {
@@ -184,6 +180,20 @@ window.addEventListener("resize", function (event) {
 });
 
 window.requestAnimationFrame(animate);
+
+
+function postScoreUser(data) {
+  const formData = new FormData();
+
+  Object.keys(data).forEach(key => formData.append(key, data[key]));
+
+  var xhr = new XMLHttpRequest();
+  
+  xhr.open("POST", 'http://62.209.143.176:5000/game_stats', true);
+  xhr.setRequestHeader("Content-type", "application/form-data");  
+
+  xhr.send(formData);  
+}
 
 // The main game loop
 function animate(timestamp) {
@@ -272,7 +282,8 @@ function animate(timestamp) {
       if (heroY > maxHeroY) {
         restartButton.style.display = "block";
         return;
-      }
+      }      
+
       break;
     }
     default:
