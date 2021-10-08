@@ -95,16 +95,16 @@ function resetGame() {
   heroX = platforms[0].x + platforms[0].w - heroDistanceFromEdge;
   heroY = 0;
 
-  if(resetState) {
-    const user_id = window.TelegramGameProxy.initParams.userId
-    
-      postScoreUser({
-        chat_id: user_id,
-        score: score,
-        game_name: 'Ninja'
-      })
-    
+  if(resetState) {    
+    const user_id = window.TelegramGameProxy.initParams.userId    
+    postScoreUser({
+      chat_id: user_id,
+      score: score,
+      game_name: 'Ninja'
+    })    
   }
+
+  resetState++
 
   draw();
 }
