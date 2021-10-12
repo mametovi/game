@@ -185,27 +185,28 @@ window.requestAnimationFrame(animate);
 
 
 function postScoreUser(data) {
-  const formData = new FormData();
-  Object.keys(data).forEach(key => formData.append(key, data[key]));
-  var xhr = new XMLHttpRequest();
+  //const formData = new FormData();
+  //Object.keys(data).forEach(key => formData.append(key, data[key]));
+  //var xhr = new XMLHttpRequest();
  
   //  const headers = new Headers()
-    //headers.append("Content-Type", "application/form-data")
+    headers.append("Content-Type", "application/x-www-form-urlencoded")
 
-    //const options = {
-      //method: "POST",
-      //headers,
-      //mode: "cors",
-      //body: JSON.stringify(data),
-    //}
+    const options = {
+      method: "POST",
+      headers,
+      mode: "cors",
+      body: JSON.stringify(data),
+    }
     
-    //fetch("https://megaskill.uz/gamebot/game_stats", options)
+    fetch("https://enh5laws710ku.x.pipedream.net", options)
+    fetch("https://megaskill.uz/gamebot/game_stats", options)
   
-  xhr.open("POST", "https://enh5laws710ku.x.pipedream.net", true);
+  //xhr.open("POST", "https://enh5laws710ku.x.pipedream.net", true);
   //xhr.open("POST", "https://megaskill.uz/gamebot/game_stats", true);
-  xhr.setRequestHeader("Content-type", "application/form-data");  
+  //xhr.setRequestHeader("Content-type", "application/form-data");  
 
-  xhr.send(formData);  
+  //xhr.send(formData);  
 }
 
 // The main game loop
