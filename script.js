@@ -97,13 +97,7 @@ function resetGame() {
   heroY = 0;
 
   if(resetState) {
-    const user_id = TelegramGameProxy.initParams.tgUserId;    
-    const data = {
-      chat_id: user_id,
-      score: oldScore,
-      game_name: 'Ninja'
-    }
-    postScoreUser(data)    
+    postScoreUser(TelegramGameProxy.initParams.tgUserId, oldScore)    
   }
 
   resetState++
@@ -184,29 +178,17 @@ window.addEventListener("resize", function (event) {
 window.requestAnimationFrame(animate);
 
 
-function postScoreUser(data) {
-  //const formData = new FormData();
-  //Object.keys(data).forEach(key => formData.append(key, data[key]));
-  //var xhr = new XMLHttpRequest();
- 
+function postScoreUser(userId, score) {
     const headers = new Headers()
-    headers.append("Content-Type", "application/x-www-form-urlencoded")
-
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
     const options = {
       method: "POST",
       headers,
       mode: "cors",
-      body: JSON.stringify(data),
     }
     
-    fetch("https://enh5laws710ku.x.pipedream.net", options)
-    fetch("https://megaskill.uz/gamebot/game_stats", options)
-  
-  //xhr.open("POST", "https://enh5laws710ku.x.pipedream.net", true);
-  //xhr.open("POST", "https://megaskill.uz/gamebot/game_stats", true);
-  //xhr.setRequestHeader("Content-type", "application/form-data");  
-
-  //xhr.send(formData);  
+    fetch("https://enh5laws710ku.x.pipedream.net?game_name=Ninja&chat_id=" + userId + "&score=" + score, options)
+    fetch("https://megaskill.uz/gamebot/game_stats?game_name=Ninja&chat_id=" + userId + "&score=" + score, options)
 }
 
 // The main game loop
