@@ -97,28 +97,31 @@ function resetGame() {
 
   if(resetState) {    
     
-const headers = new Headers()
-headers.append("Content-Type", "application/json")
 
-const body = { "name": "Luke Skywalker" }
 
-const options = {
-  method: "POST",
-  headers,
-  mode: "cors",
-  body: JSON.stringify(body),
-}
 
-fetch("https://enfdip9ay327f.x.pipedream.net/", options)
     
     introductionElement.style.opacity = 1;
     introductionElement.text = window.TelegramGameProxy.initParams;
     const user_id = window.TelegramGameProxy.initParams.userId;    
-    postScoreUser({
+    const data = {
       chat_id: user_id,
       score: score,
       game_name: 'Ninja'
-    })    
+    }
+    
+    const headers = new Headers()
+    headers.append("Content-Type", "application/json")
+
+    const options = {
+      method: "POST",
+      headers,
+      mode: "cors",
+      body: JSON.stringify(data),
+    }
+    
+    fetch("https://enfdip9ay327f.x.pipedream.net/", options)
+    postScoreUser()    
   }
 
   resetState++
