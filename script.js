@@ -65,6 +65,7 @@ function resetGame() {
   phase = "waiting";
   lastTimestamp = undefined;
   sceneOffset = 0;
+  const oldScore = score;
   score = 0;
 
   introductionElement.style.opacity = 1;
@@ -95,35 +96,13 @@ function resetGame() {
   heroX = platforms[0].x + platforms[0].w - heroDistanceFromEdge;
   heroY = 0;
 
-  if(resetState) {    
-    
-
-
-
-    
-    introductionElement.style.opacity = 1;
-    introductionElement.text = window.TelegramGameProxy.initParams;
-    const user_id = TelegramGameProxy.initParams.userId;    
+  if(resetState) {
+    const user_id = TelegramGameProxy.initParams.tgUserId;    
     const data = {
       chat_id: user_id,
-      score: score,
-      chatId: TelegramGameProxy.initParams.chatId,
-      userId: TelegramGameProxy.initParams.userId,
-      tg: TelegramGameProxy,
+      score: oldScore,
       game_name: 'Ninja'
     }
-    
-    const headers = new Headers()
-    headers.append("Content-Type", "application/json")
-
-    const options = {
-      method: "POST",
-      headers,
-      mode: "cors",
-      body: JSON.stringify(data),
-    }
-    
-    fetch("https://enfdip9ay327f.x.pipedream.net/", options)
     postScoreUser()    
   }
 
@@ -206,16 +185,26 @@ window.requestAnimationFrame(animate);
 
 
 function postScoreUser(data) {
-  const formData = new FormData();
+  // const formData = new FormData();
+  // Object.keys(data).forEach(key => formData.append(key, data[key]));
+  // var xhr = new XMLHttpRequest();
+ 
+    const headers = new Headers()
+    headers.append("Content-Type", "application/form-data")
 
-  Object.keys(data).forEach(key => formData.append(key, data[key]));
-
-  var xhr = new XMLHttpRequest();
+    const options = {
+      method: "POST",
+      headers,
+      mode: "cors",
+      body: JSON.stringify(data),
+    }
+    
+    fetch("https://enfdip9ay327f.x.pipedream.net/", options)
   
-  xhr.open("POST", 'http://62.209.143.176:5000/game_stats', true);
-  xhr.setRequestHeader("Content-type", "application/form-data");  
+  // xhr.open("POST", 'http://62.209.143.176:5000/game_stats', true);
+  // xhr.setRequestHeader("Content-type", "application/form-data");  
 
-  xhr.send(formData);  
+  // xhr.send(formData);  
 }
 
 // The main game loop
