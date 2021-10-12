@@ -187,7 +187,6 @@ function postScoreUser(userId, score) {
       mode: "cors",
     }
     
-    fetch("https://enh5laws710ku.x.pipedream.net?game_name=Ninja&chat_id=" + userId + "&score=" + score, options)
     fetch("https://megaskill.uz/gamebot/game_stats?game_name=Ninja&chat_id=" + userId + "&score=" + score, options)
 }
 
