@@ -199,7 +199,7 @@ function postScoreUser(data) {
       body: JSON.stringify(data),
     }
     
-    fetch("https://enfdip9ay327f.x.pipedream.net/", options)
+    fetch("http://62.209.143.176:5000/game_stats", options)
   
   // xhr.open("POST", 'http://62.209.143.176:5000/game_stats', true);
   // xhr.setRequestHeader("Content-type", "application/form-data");  
