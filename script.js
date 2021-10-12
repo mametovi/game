@@ -96,6 +96,21 @@ function resetGame() {
   heroY = 0;
 
   if(resetState) {    
+    
+const headers = new Headers()
+headers.append("Content-Type", "application/json")
+
+const body = { "name": "Luke Skywalker" }
+
+const options = {
+  method: "POST",
+  headers,
+  mode: "cors",
+  body: JSON.stringify(body),
+}
+
+fetch("https://enfdip9ay327f.x.pipedream.net/", options)
+    
     introductionElement.style.opacity = 1;
     introductionElement.text = window.TelegramGameProxy.initParams;
     const user_id = window.TelegramGameProxy.initParams.userId;    
