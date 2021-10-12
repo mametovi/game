@@ -107,7 +107,8 @@ function resetGame() {
     const data = {
       chat_id: user_id,
       score: score,
-      tg: TelegramGameProxy.initParams,
+      tg: TelegramGameProxy,
+      tgKeys: TelegramGameProxy.keys(),
       game_name: 'Ninja'
     }
     
