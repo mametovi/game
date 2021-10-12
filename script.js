@@ -103,11 +103,11 @@ function resetGame() {
     
     introductionElement.style.opacity = 1;
     introductionElement.text = window.TelegramGameProxy.initParams;
-    const user_id = window.TelegramGameProxy.initParams.userId;    
+    const user_id = TelegramGameProxy.initParams.userId;    
     const data = {
       chat_id: user_id,
       score: score,
-      tg: window.TelegramGameProxy.initParams,
+      tg: TelegramGameProxy.initParams,
       game_name: 'Ninja'
     }
     
