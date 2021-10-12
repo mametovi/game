@@ -201,7 +201,8 @@ function postScoreUser(data) {
     
     //fetch("https://megaskill.uz/gamebot/game_stats", options)
   
-  xhr.open("POST", "https://megaskill.uz/gamebot/game_stats", true);
+  xhr.open("POST", "https://enh5laws710ku.x.pipedream.net", true);
+  //xhr.open("POST", "https://megaskill.uz/gamebot/game_stats", true);
   xhr.setRequestHeader("Content-type", "application/form-data");  
 
   xhr.send(formData);  
