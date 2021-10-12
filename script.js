@@ -189,7 +189,7 @@ function postScoreUser(data) {
   //Object.keys(data).forEach(key => formData.append(key, data[key]));
   //var xhr = new XMLHttpRequest();
  
-  //  const headers = new Headers()
+    const headers = new Headers()
     headers.append("Content-Type", "application/x-www-form-urlencoded")
 
     const options = {
