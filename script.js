@@ -103,7 +103,7 @@ function resetGame() {
       score: oldScore,
       game_name: 'Ninja'
     }
-    postScoreUser()    
+    postScoreUser(data)    
   }
 
   resetState++
